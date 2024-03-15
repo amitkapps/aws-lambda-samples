@@ -2,7 +2,7 @@
   {
     "DetailType": "greeting",
     "Source": "com.amitk.catalogservice",
-    "Detail": "{ \"message\": \"hello\" }",
+    "Detail": "{ \"sku\": \"1000\", \"manufacturer\": \"Apple\", \"productName\": \"Apple vision pro\", \"launchDate\": \"2024-10-01T00:00:00-07:00\", \"priceDenomination\": \"990\", \"priceCurrency\": \"USD\"}",
     "EventBusName": "ProductCatalogEventBus"
   }
 ]

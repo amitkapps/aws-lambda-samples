@@ -33,3 +33,8 @@
 1. `cd CatalogUpdateProcessor`
 2. `aws events put-events --entries file://src/test/cli/EventBridgeTest.json --profile <aws profile>`
 3. note the event bus name and the source in the json file
+4. Watch the application logs
+5. `sam logs --stack-name catalog-update-processor --tail  --profile <aws profile>`
+
+# Frameworks and libraries in use
+1. Lambda powertools for Logging, Serialization utilities
