@@ -38,3 +38,14 @@
 
 # Frameworks and libraries in use
 1. Lambda powertools for Logging, Serialization utilities
+
+# Observability
+1. Using Lambda powertools Logging to push attributes
+   2. Check logs for a particular sku processing
+   3. Cloudwatch logs insights | lambda
+   3. ```typescript
+       fields @timestamp, @message, @logStream, @log
+       | filter `sku`='9999'
+       | sort @timestamp desc
+       | limit 1000
+       ```
