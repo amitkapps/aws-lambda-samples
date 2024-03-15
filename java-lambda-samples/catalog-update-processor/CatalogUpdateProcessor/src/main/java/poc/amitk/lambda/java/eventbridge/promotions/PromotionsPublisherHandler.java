@@ -1,4 +1,4 @@
-package poc.amitk.lambda.java.eventbridge;
+package poc.amitk.lambda.java.eventbridge.promotions;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -9,6 +9,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import poc.amitk.lambda.java.eventbridge.infra.EventBridgePublisher;
+import poc.amitk.lambda.java.eventbridge.model.CatalogUpdateEvent;
+import poc.amitk.lambda.java.eventbridge.model.ProductPromotion;
 import software.amazon.lambda.powertools.logging.Logging;
 import software.amazon.lambda.powertools.logging.LoggingUtils;
 import software.amazon.lambda.powertools.utilities.JsonConfig;
@@ -18,13 +20,13 @@ import static software.amazon.lambda.powertools.utilities.EventDeserializer.extr
 /**
  * @author amitkapps
  */
-public class PromotionsPublisher implements RequestHandler<ScheduledEvent, Void> {
-    private Logger logger = LoggerFactory.getLogger(PromotionsPublisher.class);
+public class PromotionsPublisherHandler implements RequestHandler<ScheduledEvent, Void> {
+    private Logger logger = LoggerFactory.getLogger(PromotionsPublisherHandler.class);
 
     private PromotionsCollectorService promotionsCollectorService;
     private EventBridgePublisher eventBridgePublisher;
 
-    public PromotionsPublisher(){
+    public PromotionsPublisherHandler(){
 //        Add joda time ane java time handling for
         ObjectMapper mapper = JsonConfig.get().getObjectMapper();
         mapper.registerModule(new JavaTimeModule());

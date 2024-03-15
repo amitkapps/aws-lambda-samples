@@ -1,4 +1,4 @@
-package poc.amitk.lambda.java.eventbridge;
+package poc.amitk.lambda.java.eventbridge.model;
 
 import java.time.ZonedDateTime;
 import java.util.Date;

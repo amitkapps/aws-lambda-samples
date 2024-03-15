@@ -16,7 +16,7 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ../CatalogUpdateProcessor
-      Handler: poc.amitk.lambda.java.eventbridge.PromotionsPublisher::handleRequest
+      Handler: poc.amitk.lambda.java.eventbridge.promotions.PromotionsPublisherHandler::handleRequest
       Runtime: java21
       Architectures:
         - x86_64

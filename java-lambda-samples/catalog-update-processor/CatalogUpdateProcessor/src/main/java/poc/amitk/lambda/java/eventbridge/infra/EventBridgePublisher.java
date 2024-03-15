@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import poc.amitk.lambda.java.eventbridge.ProductPromotion;
+import poc.amitk.lambda.java.eventbridge.model.ProductPromotion;
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.services.eventbridge.EventBridgeClient;
 import software.amazon.awssdk.services.eventbridge.model.PutEventsRequest;
@@ -13,6 +13,7 @@ import software.amazon.awssdk.services.eventbridge.model.PutEventsRequestEntry;
 import software.amazon.awssdk.services.eventbridge.model.PutEventsResponse;
 
 /**
+ * Ref: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/java_eventbridge_code_examples.html
  * @author amitkapps
  */
 public class EventBridgePublisher {

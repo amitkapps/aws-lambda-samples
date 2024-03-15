@@ -1,6 +1,8 @@
-package poc.amitk.lambda.java.eventbridge;
+package poc.amitk.lambda.java.eventbridge.promotions;
 
 import com.github.javafaker.Faker;
+import poc.amitk.lambda.java.eventbridge.model.CatalogUpdateEvent;
+import poc.amitk.lambda.java.eventbridge.model.ProductPromotion;
 
 import java.util.concurrent.TimeUnit;
 
