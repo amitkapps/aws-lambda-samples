@@ -46,10 +46,10 @@ public class EventBridgePublisher {
         PutEventsRequest eventsRequest = PutEventsRequest.builder()
                 .entries(entry)
                 .build();
-        logger.info("putting events on the bus {}", eventsRequest);
+        logger.debug("putting events on the bus {}", eventsRequest);
         PutEventsResponse putEventsResponse = eventBrClient.putEvents(eventsRequest);
-        logger.info("putEventsResponse entries: {}", putEventsResponse.entries());
-        logger.info("putEventsResponse failure count: {}", putEventsResponse.failedEntryCount());
+        logger.debug("putEventsResponse entries: {}", putEventsResponse.entries());
+        logger.info("putEventsResponse failure/total count: {}/{}", putEventsResponse.failedEntryCount(), putEventsResponse.entries().size());
         eventBrClient.close();
 
     }

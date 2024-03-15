@@ -52,6 +52,7 @@ public class PromotionsPublisherHandler implements RequestHandler<ScheduledEvent
     }
 
     private void processProductCatalogUpdate(CatalogUpdateEvent catalogUpdateEvent) {
+        logger.info("processing catalog update from, {}", catalogUpdateEvent.getProductName());
         ProductPromotion productPromotion = promotionsCollectorService.gatherPromotionsForProduct(catalogUpdateEvent);
         logger.info("Received promotion: {}", productPromotion);
         logger.info("publishing the promotion");

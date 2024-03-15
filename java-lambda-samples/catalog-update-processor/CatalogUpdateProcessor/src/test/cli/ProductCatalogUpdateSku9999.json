@@ -1,0 +1,8 @@
+[
+  {
+    "DetailType": "ProductCatalogUpdate",
+    "Source": "com.amitk.catalogservice",
+    "Detail": "{ \"sku\": \"9999\", \"manufacturer\": \"BoomWorks\", \"productName\": \"Fireworks\", \"launchDate\": \"2024-10-01T00:00:00-07:00\", \"priceDenomination\": \"9999\", \"priceCurrency\": \"USD\"}",
+    "EventBusName": "ProductCatalogEventBus"
+  }
+]
