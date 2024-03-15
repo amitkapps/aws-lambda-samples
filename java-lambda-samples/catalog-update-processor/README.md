@@ -12,21 +12,23 @@
 
 ## Test infra
 1. post an event to the event bridge
-2. `aws events put-events --entries file://event-bridge.json --profile <aws profile>`
+2. `cd sam`
+2. `aws events put-events --entries file://events/event-bridge.json --profile <aws profile>`
 
 # App setup
 ## Build and test application locally
 1. `cd sam`
 2. `sam build`
-3. `sam local invoke CatalogUpdateProcessorFunction -e ../events/event-bridge.json`
+3. `sam local invoke CatalogUpdateProcessorFunction -e ./events/event-bridge.json`
 4. This should get the event-bridge event to the lambda function
 
 ## Deploy app to the cloud and remote invoke the function
 1. `sam deploy --guided --profile <aws profile>`
 2. Remote invoke the function
-3. `sam remote invoke --stack-name catalog-update-processor CatalogUpdateProcessorFunction --event-file ../event/event-bridge.json --profile <aws profile>`
+3. `sam remote invoke --stack-name catalog-update-processor CatalogUpdateProcessorFunction --event-file ./event/event-bridge.json --profile <aws profile>`
 4. Keep the code in sync while developing 
 5. `sam sync --watch --profile <aws profile>`
 
 ## Test via publishing events to the event bridge
-1. `aws events put-events --entries file://events/event-bridge.json  --profile `
+1. `cd sam`
+2. `aws events put-events --entries file://events/event-bridge.json  --profile `
