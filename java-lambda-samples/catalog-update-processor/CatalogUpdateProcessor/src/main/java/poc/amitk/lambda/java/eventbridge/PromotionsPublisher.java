@@ -9,6 +9,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import software.amazon.lambda.powertools.logging.Logging;
+import software.amazon.lambda.powertools.logging.LoggingUtils;
 import software.amazon.lambda.powertools.utilities.JsonConfig;
 import static software.amazon.lambda.powertools.utilities.EventDeserializer.extractDataFrom;
 
@@ -37,6 +38,7 @@ public class PromotionsPublisher implements RequestHandler<ScheduledEvent, Void>
     public Void handleRequest(ScheduledEvent event, Context context) {
         logger.debug("message received, {}", event.getDetail());
         CatalogUpdateEvent catalogUpdateEvent = extractDataFrom(event).as(CatalogUpdateEvent.class);
+        LoggingUtils.appendKey("sku", catalogUpdateEvent.getSku());
         logger.debug("parsed catalog update event: {}", catalogUpdateEvent);
 
         processProductCatalogUpdate(catalogUpdateEvent);
