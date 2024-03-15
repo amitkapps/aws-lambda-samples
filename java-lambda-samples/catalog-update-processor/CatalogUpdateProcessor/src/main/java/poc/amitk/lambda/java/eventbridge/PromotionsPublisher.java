@@ -8,6 +8,7 @@ import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import poc.amitk.lambda.java.eventbridge.infra.EventBridgePublisher;
 import software.amazon.lambda.powertools.logging.Logging;
 import software.amazon.lambda.powertools.logging.LoggingUtils;
 import software.amazon.lambda.powertools.utilities.JsonConfig;
@@ -21,6 +22,7 @@ public class PromotionsPublisher implements RequestHandler<ScheduledEvent, Void>
     private Logger logger = LoggerFactory.getLogger(PromotionsPublisher.class);
 
     private PromotionsCollectorService promotionsCollectorService;
+    private EventBridgePublisher eventBridgePublisher;
 
     public PromotionsPublisher(){
 //        Add joda time ane java time handling for
@@ -31,6 +33,7 @@ public class PromotionsPublisher implements RequestHandler<ScheduledEvent, Void>
 //          handling (through reference chain: com.amazonaws.services.lambda.runtime.events.ScheduledEvent[\"time\"])
         mapper.registerModule(new JodaModule());
         this.promotionsCollectorService = new PromotionsCollectorService();
+        this.eventBridgePublisher = new EventBridgePublisher();
     }
 
     @Logging(logEvent = true)
@@ -49,5 +52,7 @@ public class PromotionsPublisher implements RequestHandler<ScheduledEvent, Void>
     private void processProductCatalogUpdate(CatalogUpdateEvent catalogUpdateEvent) {
         ProductPromotion productPromotion = promotionsCollectorService.gatherPromotionsForProduct(catalogUpdateEvent);
         logger.info("Received promotion: {}", productPromotion);
+        logger.info("publishing the promotion");
+        eventBridgePublisher.publishEvent(productPromotion);
     }
 }

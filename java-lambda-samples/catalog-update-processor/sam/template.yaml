@@ -23,8 +23,11 @@ Resources:
       MemorySize: 512
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
-          POWERTOOLS_LOG_LEVEL: DEBUG
+          POWERTOOLS_LOG_LEVEL: INFO
           POWERTOOLS_SERVICE_NAME: catalog-update-processor
+      Policies:
+        - EventBridgePutEventsPolicy:
+            EventBusName: ProductCatalogEventBus
       Events:
         ProductUpdatedEvent:
           Type: EventBridgeRule # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
