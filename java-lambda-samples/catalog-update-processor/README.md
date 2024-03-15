@@ -30,5 +30,6 @@
 5. `sam sync --watch --profile <aws profile>`
 
 ## Test via publishing events to the event bridge
-1. `cd sam`
-2. `aws events put-events --entries file://events/event-bridge.json  --profile `
+1. `cd CatalogUpdateProcessor`
+2. `aws events put-events --entries file://src/test/cli/EventBridgeTest.json --profile <aws profile>`
+3. note the event bus name and the source in the json file

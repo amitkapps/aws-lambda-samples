@@ -1,7 +1,7 @@
 [
   {
     "DetailType": "greeting",
-    "Source": "aws-cli",
+    "Source": "com.amitk.catalogservice",
     "Detail": "{ \"message\": \"hello\" }",
     "EventBusName": "ProductCatalogEventBus"
   }
