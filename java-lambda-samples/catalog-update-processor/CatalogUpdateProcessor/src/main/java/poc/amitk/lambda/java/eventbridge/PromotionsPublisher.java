@@ -19,6 +19,8 @@ import static software.amazon.lambda.powertools.utilities.EventDeserializer.extr
 public class PromotionsPublisher implements RequestHandler<ScheduledEvent, Void> {
     private Logger logger = LoggerFactory.getLogger(PromotionsPublisher.class);
 
+    private PromotionsCollectorService promotionsCollectorService;
+
     public PromotionsPublisher(){
 //        Add joda time ane java time handling for
         ObjectMapper mapper = JsonConfig.get().getObjectMapper();
@@ -27,7 +29,7 @@ public class PromotionsPublisher implements RequestHandler<ScheduledEvent, Void>
 //          Joda date/time type `org.joda.time.DateTime` not supported by default: add Module \"com.fasterxml.jackson.datatype:jackson-datatype-joda\" to enable
 //          handling (through reference chain: com.amazonaws.services.lambda.runtime.events.ScheduledEvent[\"time\"])
         mapper.registerModule(new JodaModule());
-
+        this.promotionsCollectorService = new PromotionsCollectorService();
     }
 
     @Logging(logEvent = true)
@@ -36,6 +38,14 @@ public class PromotionsPublisher implements RequestHandler<ScheduledEvent, Void>
         logger.debug("message received, {}", event.getDetail());
         CatalogUpdateEvent catalogUpdateEvent = extractDataFrom(event).as(CatalogUpdateEvent.class);
         logger.debug("parsed catalog update event: {}", catalogUpdateEvent);
+
+        processProductCatalogUpdate(catalogUpdateEvent);
+
         return null;
+    }
+
+    private void processProductCatalogUpdate(CatalogUpdateEvent catalogUpdateEvent) {
+        ProductPromotion productPromotion = promotionsCollectorService.gatherPromotionsForProduct(catalogUpdateEvent);
+        logger.info("Received promotion: {}", productPromotion);
     }
 }
