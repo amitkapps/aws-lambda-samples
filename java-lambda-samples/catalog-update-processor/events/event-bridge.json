@@ -1,0 +1,8 @@
+[
+  {
+    "DetailType": "greeting",
+    "Source": "aws-cli",
+    "Detail": "{ \"message\": \"hello\" }",
+    "EventBusName": "ProductCatalogEventBus"
+  }
+]
