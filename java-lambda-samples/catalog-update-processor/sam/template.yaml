@@ -30,6 +30,7 @@ Resources:
             EventBusName: ProductCatalogEventBus
       Events:
         ProductUpdatedEvent:
+#         Sam template Function > Event Source > EventBridgeRule https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-function-eventbridgerule.html
           Type: EventBridgeRule # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             EventBusName: ProductCatalogEventBus
@@ -37,8 +38,12 @@ Resources:
               source:
                 - com.amitk.catalogservice
             DeadLetterConfig:
+#              With the queue logical id the dlq is created automatically
               Type: SQS
               QueueLogicalId: PromotionsPublisherHandlerDLQ
+            RetryPolicy:
+              MaximumEventAgeInSeconds: 300
+              MaximumRetryAttempts: 2
 
 #  PromotionsPublisherHandlerDLQ:
 #    Type: AWS::SQS::Queue
