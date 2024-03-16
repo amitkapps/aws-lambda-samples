@@ -36,9 +36,12 @@ Resources:
             Pattern:
               source:
                 - com.amitk.catalogservice
+            DeadLetterConfig:
+              Type: SQS
+              QueueLogicalId: PromotionsPublisherHandlerDLQ
 
-  PromotionsPublisherHandlerDLQ:
-    Type: AWS::SQS::Queue
+#  PromotionsPublisherHandlerDLQ:
+#    Type: AWS::SQS::Queue
 
 
 Outputs:
