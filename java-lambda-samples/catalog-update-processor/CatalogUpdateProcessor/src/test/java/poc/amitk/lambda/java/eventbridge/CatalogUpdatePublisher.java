@@ -81,7 +81,7 @@ public class CatalogUpdatePublisher {
         CatalogUpdateEvent catalogUpdateEvent = new CatalogUpdateEvent();
         Faker faker = new Faker();
         catalogUpdateEvent.setManufacturer(faker.company().name());
-        catalogUpdateEvent.setSku(String.valueOf(faker.number().numberBetween(1000,10000)));
+        catalogUpdateEvent.setSku(String.valueOf(faker.number().numberBetween(1000,999999)));
         catalogUpdateEvent.setProductName(faker.commerce().productName());
         catalogUpdateEvent.setLaunchDate(ZonedDateTime.ofInstant(faker.date().future(365, TimeUnit.DAYS).toInstant(), TimeZone.getDefault().toZoneId()));
         catalogUpdateEvent.setPriceCurrency("USD");

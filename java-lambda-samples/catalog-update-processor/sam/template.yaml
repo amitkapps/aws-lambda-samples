@@ -28,6 +28,9 @@ Resources:
       Policies:
         - EventBridgePutEventsPolicy:
             EventBusName: ProductCatalogEventBus
+      DeadLetterQueue:
+        Type: SQS
+        TargetArn: !GetAtt PromotionsPublisherHandlerDLQ.Arn
       Events:
         ProductUpdatedEvent:
 #         Sam template Function > Event Source > EventBridgeRule https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-function-eventbridgerule.html
@@ -40,13 +43,14 @@ Resources:
             DeadLetterConfig:
 #              With the queue logical id the dlq is created automatically
               Type: SQS
-              QueueLogicalId: PromotionsPublisherHandlerDLQ
+              QueueLogicalId: ProductUdpatedEventForPromotionsDLQ
             RetryPolicy:
               MaximumEventAgeInSeconds: 300
               MaximumRetryAttempts: 2
 
-#  PromotionsPublisherHandlerDLQ:
-#    Type: AWS::SQS::Queue
+
+  PromotionsPublisherHandlerDLQ:
+    Type: AWS::SQS::Queue
 
 
 Outputs:

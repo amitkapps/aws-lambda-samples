@@ -38,7 +38,7 @@ public class PromotionsPublisherHandler implements RequestHandler<ScheduledEvent
         this.eventBridgePublisher = new EventBridgePublisher();
     }
 
-    @Logging(logEvent = true)
+    @Logging(logEvent = false)
     @Override
     public Void handleRequest(ScheduledEvent event, Context context) {
         logger.debug("message received, {}", event.getDetail());
