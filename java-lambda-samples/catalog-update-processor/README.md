@@ -39,6 +39,15 @@
 # Frameworks and libraries in use
 1. Lambda powertools for Logging, Serialization utilities
 
+# Error handling
+1. Event bridge DLQ - when EB is unable to delivery messages to the target (target unavailable or permission issues etc)
+2. Lambda DLQ - When Lambda is unable to successfully process the event with preconfigured set of retries - max 2.
+3. Post a poison message
+4. `cd CatalogUpdateProcessor`
+5. `aws events put-events --entries file://src/test/cli/ProductCatalogUpdateSku9999.json --profile <aws profile>`
+6. Lambda will throw an error for product SKU 9999, which will be retried and eventually land on the sqs DLQ configured.
+7. 
+
 # Observability
 1. Using Lambda powertools Logging to push attributes
    2. Check logs for a particular sku processing

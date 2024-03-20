@@ -45,8 +45,8 @@ Resources:
               Type: SQS
               QueueLogicalId: ProductUdpatedEventForPromotionsDLQ
             RetryPolicy:
-              MaximumEventAgeInSeconds: 300
-              MaximumRetryAttempts: 2
+              MaximumEventAgeInSeconds: 60
+              MaximumRetryAttempts: 1
 
 
   PromotionsPublisherHandlerDLQ:
