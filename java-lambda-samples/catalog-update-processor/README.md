@@ -46,7 +46,8 @@
 4. `cd CatalogUpdateProcessor`
 5. `aws events put-events --entries file://src/test/cli/ProductCatalogUpdateSku9999.json --profile <aws profile>`
 6. Lambda will throw an error for product SKU 9999, which will be retried and eventually land on the sqs DLQ configured.
-7. 
+7. `aws sqs get-queue-attributes --profile <aws profile> --queue-url <queue-url from sam deploy output> --attribute-names ApproximateNumberOfMessages`
+8. `aws sqs receive-message --profile <aws profile> --queue-url <queue-url from sam deploy output> --output yaml`
 
 # Observability
 1. Using Lambda powertools Logging to push attributes
