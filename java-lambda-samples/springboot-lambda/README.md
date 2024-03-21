@@ -26,6 +26,9 @@ building APIs with springboot as lambda functions
 
 # build
 1. `sam build`
+2. Need an existing Database (schema name products) with mysql Aurora credentials stored in secrets manager
+   3. table schema: `products_schema.sql`
+   4. test data: `products_data.sql`
 2. `sam deploy --guided --profile <aws profile>`
    1. Following parameters needed
    2. LambdaSubnetId
@@ -35,6 +38,6 @@ building APIs with springboot as lambda functions
 
 # test
 1. `curl <api-gateway-url>/Prod/products`
-2. `curl -X POST -d '{"productSku":"1111", "productName":"Huggies diaper"}' <APIGatewayUrl>/Prod/products --header "Content-Type:application/json"`
+2. `curl -X POST -d '{"productSku":"1111", "productName":"Huggies diaper", "launchDate": "2024-01-30T00:00:00Z"}' <APIGatewayUrl>/Prod/products --header "Content-Type:application/json"`
 3. `curl <api-gateway-url>/Prod/products/1111`
 4. `curl -X DELETE <APIGatewayUrl>/Prod/products/1111 --header "Content-Type:application/json"`
