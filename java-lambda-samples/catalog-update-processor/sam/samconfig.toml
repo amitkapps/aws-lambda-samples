@@ -19,7 +19,7 @@ confirm_changeset = true
 resolve_s3 = true
 s3_prefix = "catalog-update-processor"
 region = "us-west-2"
-profile = "matsonlabs"
+profile = "labs"
 image_repositories = []
 
 [default.package.parameters]
