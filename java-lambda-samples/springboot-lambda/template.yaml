@@ -9,7 +9,21 @@ Description: >
 Globals:
   Function:
     Timeout: 20
-    MemorySize: 512
+    MemorySize: 2048
+
+Parameters:
+  LambdaSubnetId:
+    Type: String
+    Description: The subnet the lambda function will run inside of the vpc
+  LambdaSecurityGroupId:
+    Type: String
+    Description: The security group the function will use (needs access to secrets manager service, mysql)
+  RdsMysqlSecretArn:
+    Type: String
+    Description: The credentials for mysql rds database
+  RdsMysqlSecretId:
+    Type: String
+    Description: The secret id for mysql rds database credentials
 
 Resources:
   ProductCatalogGetFunction:
@@ -20,11 +34,18 @@ Resources:
       Runtime: java21
       Architectures:
         - x86_64
-      MemorySize: 1024
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
-          PARAM1: VALUE
+          DATASOURCE_SECRET_ID: !Ref RdsMysqlSecretId
           MAIN_CLASS: poc.amitk.lambda.sb.api.ProductCatalogSbApiApplication
+      VpcConfig:
+        SubnetIds:
+          - !Ref LambdaSubnetId
+        SecurityGroupIds:
+          - !Ref LambdaSecurityGroupId
+      Policies:
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn: !Ref RdsMysqlSecretArn
       Events:
         GetAllProducts:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api

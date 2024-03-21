@@ -1,11 +1,21 @@
 package poc.amitk.lambda.sb.api;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+import java.io.Serializable;
+
 /**
  * @author amitkapps
  */
-public class Product {
-    String productSku;
-    String productName;
+@Entity(name = "product")
+public class ProductEntity implements Serializable {
+    @Id
+    private String productSku;
+
+    private String productName;
+
+    protected ProductEntity(){}
 
     public String getProductSku() {
         return productSku;
@@ -22,5 +32,4 @@ public class Product {
     public void setProductName(String productName) {
         this.productName = productName;
     }
-
 }
