@@ -14,5 +14,5 @@ public interface ProductRepository extends Repository<ProductEntity, String> {
 
     ProductEntity save(ProductEntity productEntity);
 
-    ProductEntity deleteByProductSku(String productSku);
+    ProductEntity delete(ProductEntity productEntity);
 }
