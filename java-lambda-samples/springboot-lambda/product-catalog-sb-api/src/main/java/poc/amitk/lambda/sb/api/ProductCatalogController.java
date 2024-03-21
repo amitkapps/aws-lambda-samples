@@ -1,6 +1,9 @@
 package poc.amitk.lambda.sb.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author amitkapps
@@ -9,21 +12,26 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/products")
 public class ProductCatalogController {
 
+    @Autowired
+    private ProductService productService;
+
     @GetMapping("")
-    public String getProducts(){
-        return """
-                [
-                    {"productId": "1", "productName": "Samsung Galaxy S8"},
-                    {"productId": "2", "productName": "iPhone 15 pro max"}
-                ]
-                """;
+    public List<Product> getProducts(){
+        return productService.getAllProducts();
     }
 
-    @GetMapping("/{productId}")
-    public Product getProductById(@PathVariable Long productId){
-        Product product = new Product();
-        product.setProductId(productId);
-        product.setProductName("iPhone SE");
-        return product;
+    @GetMapping("/{productSku}")
+    public Product getProductById(@PathVariable String productSku){
+        return productService.getProductBySku(productSku);
+    }
+
+    @PostMapping("")
+    public void saveProduct(@RequestBody Product product){
+        productService.addProductToCatalog(product);
+    }
+
+    @DeleteMapping("/{productSku}")
+    public void removeProduct(@PathVariable String productSku){
+        productService.removeProductFromCatalog(productSku);
     }
 }

@@ -4,15 +4,15 @@ package poc.amitk.lambda.sb.api;
  * @author amitkapps
  */
 public class Product {
-    Long productId;
+    String productSku;
     String productName;
 
-    public Long getProductId() {
-        return productId;
+    public String getProductSku() {
+        return productSku;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProductSku(String productSku) {
+        this.productSku = productSku;
     }
 
     public String getProductName() {
