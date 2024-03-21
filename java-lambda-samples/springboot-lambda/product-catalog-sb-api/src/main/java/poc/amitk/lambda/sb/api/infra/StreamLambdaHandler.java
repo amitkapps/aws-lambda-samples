@@ -1,4 +1,4 @@
-package poc.amitk.lambda.sb.api;
+package poc.amitk.lambda.sb.api.infra;
 
 import com.amazonaws.serverless.exceptions.ContainerInitializationException;
 import com.amazonaws.serverless.proxy.model.AwsProxyRequest;
@@ -6,6 +6,7 @@ import com.amazonaws.serverless.proxy.model.AwsProxyResponse;
 import com.amazonaws.serverless.proxy.spring.SpringBootLambdaContainerHandler;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestStreamHandler;
+import poc.amitk.lambda.sb.api.ProductCatalogSbApiApplication;
 
 import java.io.IOException;
 import java.io.InputStream;

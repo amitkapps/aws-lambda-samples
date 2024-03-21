@@ -31,30 +31,37 @@ public class DataAccessConfig {
     @Value("${datasource.secret-id}")
     String datasourceSecretId;
 
+    @Value("${datasource.db-schema-name}")
+    String databaseSchemaName;
+
     @Bean
     @Qualifier("productsDS")
     public DataSource productsDS() throws JsonProcessingException {
 
+        HikariConfig config = new HikariConfig();
         Properties props = new Properties();
         //Add other connection pooling properties - min/max/timeouts/min idle
-        props.setProperty("poolName", "ProductsConnectionPool");
-        props.setProperty("driverClassName", "com.mysql.cj.jdbc.Driver");
+        config.setPoolName("ProductsConnectionPool");
+        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
         Map<String, String> credentialsMap = productsDSCredentials(datasourceSecretId);
+        config.setJdbcUrl(getJdbcUrlFromDatsourceSecret(credentialsMap));
+        config.setUsername(credentialsMap.get("username"));
+        config.setPassword(credentialsMap.get("password"));
+        config.setMaximumPoolSize(2);
+//        props.setProperty("connectionTestQuery", "select 1 from dual"); // only for non-jdbc4-compliant drivers
+        props.put("dataSource.logWriter", new PrintWriter(System.out));
+
+        return new HikariDataSource(config);
+    }
+
+    private String getJdbcUrlFromDatsourceSecret(Map<String, String> credentialsMap){
         String jdbcUrl = "jdbc:mysql://"
                 + credentialsMap.get("host")
                 + ":"
                 + String.valueOf(credentialsMap.get("port"))
-                + "/products";
-        props.setProperty("jdbcUrl", jdbcUrl);
-        props.setProperty("username", credentialsMap.get("username"));
-        props.setProperty("password", credentialsMap.get("password"));
-        logger.info("jdbcUrl: {}", jdbcUrl);
-//        props.setProperty("connectionTestQuery", "select 1 from dual"); // only for non-jdbc4-compliant drivers
-        props.put("dataSource.logWriter", new PrintWriter(System.out));
-
-        HikariConfig config = new HikariConfig(props);
-        HikariDataSource ds = new HikariDataSource(config);
-        return ds;
+                + "/" + databaseSchemaName;
+        logger.info("JdbcUrl: {}", jdbcUrl);
+        return jdbcUrl;
     }
 
     @Bean

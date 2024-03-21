@@ -1,4 +1,4 @@
-package poc.amitk.lambda.sb.api;
+package poc.amitk.lambda.sb.api.product;
 
 import java.time.ZonedDateTime;
 

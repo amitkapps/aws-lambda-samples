@@ -1,4 +1,7 @@
-package poc.amitk.lambda.sb.api;
+package poc.amitk.lambda.sb.api.product;
+
+import poc.amitk.lambda.sb.api.product.Product;
+import poc.amitk.lambda.sb.api.product.ProductEntity;
 
 import java.time.ZonedDateTime;
 

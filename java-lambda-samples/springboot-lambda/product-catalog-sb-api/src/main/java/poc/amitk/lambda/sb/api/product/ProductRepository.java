@@ -1,6 +1,7 @@
-package poc.amitk.lambda.sb.api;
+package poc.amitk.lambda.sb.api.product;
 
 import org.springframework.data.repository.Repository;
+import poc.amitk.lambda.sb.api.product.ProductEntity;
 
 import java.util.List;
 
