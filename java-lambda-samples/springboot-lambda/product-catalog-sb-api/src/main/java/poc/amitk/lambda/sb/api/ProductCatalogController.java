@@ -26,8 +26,8 @@ public class ProductCatalogController {
     }
 
     @PostMapping("")
-    public void saveProduct(@RequestBody Product product){
-        productService.addProductToCatalog(product);
+    public Product saveProduct(@RequestBody Product product){
+        return productService.addProductToCatalog(product);
     }
 
     @DeleteMapping("/{productSku}")

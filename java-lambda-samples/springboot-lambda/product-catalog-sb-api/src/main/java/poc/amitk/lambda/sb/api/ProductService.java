@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,22 +21,29 @@ public class ProductService {
 
     public Product getProductBySku(String productSku){
         logger.info("Getting product: {}", productSku);
-        return ProductPojoConverter.toProduct(productRepository.findByProductSku(productSku));
+        ProductEntity productEntity = productRepository.findByProductSku(productSku);
+        return null != productEntity ? ProductPojoConverter.toProduct(productEntity) : null;
     }
 
     public List<Product> getAllProducts() {
         logger.info("getting all products");
-        ArrayList<Product> products = new ArrayList<>();
-        products.add(getProductBySku("1000"));
-        products.add(getProductBySku("2000"));
-        return products;
+        List<ProductEntity> allProductEntities = productRepository.findAll();
+        logger.info("found {} products", allProductEntities.size());
+        return allProductEntities.stream()
+                .map(ProductPojoConverter::toProduct)
+                .toList();
     }
 
-    public void addProductToCatalog(Product product){
+    @Transactional
+    public Product addProductToCatalog(Product product){
         logger.info("Adding product {} to catalog", product.getProductSku());
+        ProductEntity productEntity = productRepository.save(ProductPojoConverter.toProductEntity(product));
+        return ProductPojoConverter.toProduct(productEntity);
     }
 
+    @Transactional
     public void removeProductFromCatalog(String productSku) {
-        logger.info("Adding product {} to catalog", productSku);
+        logger.info("Removing product {} from catalog", productSku);
+        productRepository.deleteByProductSku(productSku);
     }
 }

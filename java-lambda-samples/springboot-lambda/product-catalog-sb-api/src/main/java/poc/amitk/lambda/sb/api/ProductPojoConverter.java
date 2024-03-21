@@ -11,4 +11,11 @@ public class ProductPojoConverter {
         product.setProductName(productEntity.getProductName());
         return product;
     }
+
+    public static ProductEntity toProductEntity(Product product){
+        ProductEntity productEntity = new ProductEntity();
+        productEntity.setProductSku(product.getProductSku());
+        productEntity.setProductName(product.getProductName());
+        return productEntity;
+    }
 }
