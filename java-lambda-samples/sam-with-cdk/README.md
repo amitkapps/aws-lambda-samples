@@ -1,5 +1,5 @@
 # Overview
-Developing lambda apps with sam and deploying with cdk
+Developing lambda apps with sam and deploying additional infrastruce with cdk
 
 # Project setup
 1. sam init to scaffold the lambda function and the build setup
