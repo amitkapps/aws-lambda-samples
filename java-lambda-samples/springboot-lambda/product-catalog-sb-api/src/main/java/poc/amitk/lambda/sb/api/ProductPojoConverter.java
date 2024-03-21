@@ -1,5 +1,7 @@
 package poc.amitk.lambda.sb.api;
 
+import java.time.ZonedDateTime;
+
 /**
  * @author amitkapps
  */
@@ -9,6 +11,8 @@ public class ProductPojoConverter {
         Product product = new Product();
         product.setProductSku(productEntity.getProductSku());
         product.setProductName(productEntity.getProductName());
+        product.setLaunchDate(ZonedDateTime.from(productEntity.getLaunchDate()));
+        product.setAddedToCatalogOn( null == productEntity.getCreatedTime() ? null : ZonedDateTime.from(productEntity.getCreatedTime()));
         return product;
     }
 
@@ -16,6 +20,8 @@ public class ProductPojoConverter {
         ProductEntity productEntity = new ProductEntity();
         productEntity.setProductSku(product.getProductSku());
         productEntity.setProductName(product.getProductName());
+        productEntity.setLaunchDate(ZonedDateTime.from(product.getLaunchDate()));
+        productEntity.setCreatedTime(null == product.getAddedToCatalogOn() ? null : ZonedDateTime.from(product.getAddedToCatalogOn()));
         return productEntity;
     }
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 
 /**
  * @author amitkapps
@@ -14,6 +15,27 @@ public class ProductEntity implements Serializable {
     private String productSku;
 
     private String productName;
+
+    private ZonedDateTime createdTime;
+
+    private ZonedDateTime launchDate;
+
+    public ZonedDateTime getLaunchDate() {
+        return launchDate;
+    }
+
+    public void setLaunchDate(ZonedDateTime launchDate) {
+        this.launchDate = launchDate;
+    }
+
+
+    public ZonedDateTime getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(ZonedDateTime created) {
+        this.createdTime = created;
+    }
 
     protected ProductEntity(){}
 

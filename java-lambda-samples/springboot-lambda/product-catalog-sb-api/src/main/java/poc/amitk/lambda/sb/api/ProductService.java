@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
@@ -37,6 +38,7 @@ public class ProductService {
     @Transactional
     public Product addProductToCatalog(Product product){
         logger.info("Adding product {} to catalog", product.getProductSku());
+        product.setAddedToCatalogOn(ZonedDateTime.now());
         ProductEntity productEntity = productRepository.save(ProductPojoConverter.toProductEntity(product));
         return ProductPojoConverter.toProduct(productEntity);
     }

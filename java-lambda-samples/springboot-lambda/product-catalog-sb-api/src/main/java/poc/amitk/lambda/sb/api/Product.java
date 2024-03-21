@@ -1,11 +1,35 @@
 package poc.amitk.lambda.sb.api;
 
+import java.time.ZonedDateTime;
+
 /**
  * @author amitkapps
  */
 public class Product {
-    String productSku;
-    String productName;
+    private String productSku;
+    private String productName;
+
+    private ZonedDateTime addedToCatalogOn;
+
+    private ZonedDateTime launchDate;
+
+    public ZonedDateTime getLaunchDate() {
+        return launchDate;
+    }
+
+    public void setLaunchDate(ZonedDateTime launchDate) {
+        this.launchDate = launchDate;
+    }
+
+
+    public ZonedDateTime getAddedToCatalogOn() {
+        return addedToCatalogOn;
+    }
+
+    public void setAddedToCatalogOn(ZonedDateTime addedToCatalogOn) {
+        this.addedToCatalogOn = addedToCatalogOn;
+    }
+
 
     public String getProductSku() {
         return productSku;
@@ -23,4 +47,13 @@ public class Product {
         this.productName = productName;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productSku='" + productSku + '\'' +
+                ", productName='" + productName + '\'' +
+                ", addedToCatalogOn=" + addedToCatalogOn +
+                ", launchDate=" + launchDate +
+                '}';
+    }
 }

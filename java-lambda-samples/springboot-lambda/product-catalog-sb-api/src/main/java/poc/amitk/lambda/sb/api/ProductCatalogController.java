@@ -1,5 +1,7 @@
 package poc.amitk.lambda.sb.api;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +13,7 @@ import java.util.List;
 @RestController()
 @RequestMapping("/products")
 public class ProductCatalogController {
+    private Logger logger = LoggerFactory.getLogger(ProductCatalogController.class);
 
     @Autowired
     private ProductService productService;
@@ -27,6 +30,7 @@ public class ProductCatalogController {
 
     @PostMapping("")
     public Product saveProduct(@RequestBody Product product){
+        logger.info("request to add product to catalog: {}", product);
         return productService.addProductToCatalog(product);
     }
 
