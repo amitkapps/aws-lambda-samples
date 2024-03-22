@@ -34,6 +34,11 @@ public class DataAccessConfig {
     @Value("${datasource.db-schema-name}")
     String databaseSchemaName;
 
+    /**
+     * Hikari datasource configs ref: <a href="https://github.com/brettwooldridge/HikariCP">...</a>
+     * @return
+     * @throws JsonProcessingException
+     */
     @Bean
     @Qualifier("productsDS")
     public DataSource productsDS() throws JsonProcessingException {
