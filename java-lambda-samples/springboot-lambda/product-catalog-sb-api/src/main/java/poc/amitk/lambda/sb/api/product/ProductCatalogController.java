@@ -35,7 +35,12 @@ public class ProductCatalogController {
     }
 
     @DeleteMapping("/{productSku}")
-    public ProductEntity removeProduct(@PathVariable String productSku){
-        return productService.removeProductFromCatalog(productSku);
+    public void removeProduct(@PathVariable String productSku){
+        productService.removeProductFromCatalog(productSku);
+    }
+
+    @DeleteMapping("")
+    public void removeAllProducts(){
+        productService.removeAllProductsFromCatalog();
     }
 }

@@ -44,10 +44,16 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductEntity removeProductFromCatalog(String productSku) {
+    public void removeProductFromCatalog(String productSku) {
         logger.info("Removing product {} from catalog", productSku);
         ProductEntity productEntity = new ProductEntity();
         productEntity.setProductSku(productSku);
-        return productRepository.delete(productEntity);
+        productRepository.delete(productEntity);
+    }
+
+    @Transactional
+    public void removeAllProductsFromCatalog() {
+        logger.info("Removing all products from the catalog");
+        productRepository.deleteAll();
     }
 }
